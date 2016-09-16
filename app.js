@@ -1,13 +1,14 @@
 // require is used to load a Node.js module. Usually you set it to a variable
 // and use the variable depending on how the module works.
 // In Node.js modules are not publicly avaiable.
-var express      = require('express');
-var path         = require('path');
-var favicon      = require('serve-favicon');
-var logger       = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
-var mongoose     = require("mongoose");
+var express        = require('express');
+var path           = require('path');
+var favicon        = require('serve-favicon');
+var logger         = require('morgan');
+var cookieParser   = require('cookie-parser');
+var bodyParser     = require('body-parser');
+var mongoose       = require("mongoose");
+var methodOverride = require('method-override');
 
 mongoose.connect('mongodb://localhost/AwesomeAnswersJuly2016');
 
@@ -31,6 +32,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
 
 app.use('/', routes);
 app.use('/users', users);

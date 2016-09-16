@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  h1= question.title
+  p= question.body
+  form(method="POST", action="/questions/" + question._id + "?_method=DELETE")
+    input.btn.btn-danger(type="submit", value="Delete")
+  h2 Answers
+  form(method="POST", action="/questions/" + question._id + "/answers")
+    .form-group
+      textarea.form-control(name="body")
+    input.btn.btn-primary(type="submit" value="Submit Answer")
+  each answer in question.answers
+    .well= answer.body
