@@ -1,0 +1,20 @@
+extends ../layout
+
+//- We define the block `content` in here which will be inserted within the
+//- layout template.
+//- pug is space-sensitive if you want to nest an HTML tag within another you
+//- have to indent the nested tag with two spaces. You define a tag in pug by
+//- writing the tag name without < or >
+block content
+  h1.main-header#question-title New Question
+  //- p Hello #{name}
+  form(method="POST", action="/questions")
+    .form-group(class=errors.title ? 'has-error' : '' )
+      label(for="title") Title
+      input.form-control#title(name="title")
+      - if(errors.title)
+        .help-block= errors.title
+    .form-group
+      label(for="body") Body
+      textarea.form-control#body(name="body")
+    input.btn.btn-primary(type="submit")
